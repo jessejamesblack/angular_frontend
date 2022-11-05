@@ -5,21 +5,28 @@
       <form [formGroup]="form" (click)="login()">
         <mat-form-field>
           <input
-            type="text"
+            type="email"
             matInput
-            placeholder="Username"
-            formControlName="username"
+            placeholder="Enter email"
+            formControlName="email"
+            ngModel
+            email
           />
         </mat-form-field>
+        <div class="errors" *ngIf="email.errors"> 
+          Please enter a valid email
+        </div>
         <mat-form-field>
           <input
             type="password"
             matInput
-            placeholder="Password"
+            placeholder="Enter password"
             formControlName="password"
           />
         </mat-form-field>
-
+        <div class="errors" *ngIf="password.errors"> 
+          Please enter a valid password
+        </div>
         <div class="button">
           <button mat-raised-button color="primary">Login</button>
         </div>

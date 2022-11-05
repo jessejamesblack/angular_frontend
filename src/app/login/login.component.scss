@@ -8,14 +8,19 @@
 
 .mat-form-field {
   width: 100%;
-  padding-top: 20%;
+  padding-top: 15%;
 }
 
+mat-card-title {
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
+}
 
-mat-card-title,
 mat-card-content {
   display: flex;
   justify-content: center;
+  font-size:medium;
 }
 
 mat-card {
@@ -30,5 +35,7 @@ mat-card {
 .button {
   display: flex;
   justify-content: flex-end;
-  padding-top: 10%;
+  position: aboslute;
+  right:  0;
+  bottom: 0;
 }

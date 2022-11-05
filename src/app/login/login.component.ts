@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -21,17 +22,16 @@ export class LoginComponent implements OnInit {
     return this.form.controls['password'];
   }
 
-  oneTimeToken: string = '';
-
-  constructor() {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {}
 
   login() {
     // call Go backend port 8080 api/login
     if (this.form.valid) {
-      this.oneTimeToken = moment().hour() + ':' + moment().minute();
-      console.log('login' + this.oneTimeToken);
+      const oneTimeToken = moment().hour() + ':' + moment().minute();
+      console.log('login');
+      this.loginService.login(this.form.controls['email'].value, this.form.controls['password'].value, oneTimeToken)
     }
   }
 }

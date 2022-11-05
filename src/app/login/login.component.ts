@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
     return this.form.controls['password'];
   }
 
+  errorMessage: string = '';
+
   constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {}
@@ -30,8 +32,15 @@ export class LoginComponent implements OnInit {
     // call Go backend port 8080 api/login
     if (this.form.valid) {
       const oneTimeToken = moment().hour() + ':' + moment().minute();
-      console.log('login');
-      this.loginService.login(this.form.controls['email'].value, this.form.controls['password'].value, oneTimeToken)
+        this.loginService.login(this.form.controls['email'].value, this.form.controls['password'].value, oneTimeToken)
+        .subscribe((data) => {
+          if(data.message === "Status OK") {
+            window.location.href = "http://onecause.com/";
+          }
+        }, (err) => {
+          this.errorMessage = 'Unauthorized Login';
+          console.log(err)
+        });
     }
   }
 }

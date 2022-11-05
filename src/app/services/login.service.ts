@@ -9,18 +9,11 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string, oneTimeToken: string) {
-    this.http
+    return this.http
       .post<any>('http://localhost:5000/api/login', JSON.stringify({
         email: email,
         password: password,
         oneTimeToken: oneTimeToken,
-      }))
-      .subscribe((data) => {
-        if(data.message === "Status OK") {
-          window.location.href = "http://onecause.com/";
-        } else {
-          
-        }
-      });
+      }));
   }
 }

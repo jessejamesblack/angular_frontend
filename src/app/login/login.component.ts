@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    email: new FormControl('', Validators.email),
-    password: new FormControl('', Validators.pattern('[ -~]*')),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [Validators.pattern('[ -~]*'), Validators.required]),
   });
 
   get email() {
@@ -20,8 +21,7 @@ export class LoginComponent implements OnInit {
     return this.form.controls['password'];
   }
 
-
-  error: string = '';
+  oneTimeToken: string = '';
 
   constructor() {}
 
@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
   login() {
     // call Go backend port 8080 api/login
     if (this.form.valid) {
-      console.log('login');
+      this.oneTimeToken = moment().hour() + ':' + moment().minute();
+      console.log('login' + this.oneTimeToken);
     }
   }
 }

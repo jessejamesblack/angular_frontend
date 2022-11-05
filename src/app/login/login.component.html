@@ -20,14 +20,14 @@
             formControlName="password"
           />
         </mat-form-field>
-        <div class="errors" *ngIf="password.errors"> 
+        <div class="errors" *ngIf="password.errors && password.touched"> 
           Please enter a valid password
         </div>
-        <div class="errors" *ngIf="email.errors"> 
+        <div class="errors" *ngIf="email.errors && password.touched"> 
           Please enter a valid email
         </div>
         <div class="button">
-          <button mat-raised-button color="primary" [disabled]="!form.valid || !form.touched">Login</button>
+          <button mat-raised-button color="primary" [disabled]="!form.valid || !(password.touched && email.touched)">Login</button>
         </div>
       </form>
     </mat-card-content>

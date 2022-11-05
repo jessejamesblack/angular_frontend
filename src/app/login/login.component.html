@@ -9,13 +9,9 @@
             matInput
             placeholder="Enter email"
             formControlName="email"
-            ngModel
-            email
           />
         </mat-form-field>
-        <div class="errors" *ngIf="email.errors"> 
-          Please enter a valid email
-        </div>
+        
         <mat-form-field>
           <input
             type="password"
@@ -27,8 +23,11 @@
         <div class="errors" *ngIf="password.errors"> 
           Please enter a valid password
         </div>
+        <div class="errors" *ngIf="email.errors"> 
+          Please enter a valid email
+        </div>
         <div class="button">
-          <button mat-raised-button color="primary">Login</button>
+          <button mat-raised-button color="primary" [disabled]="!form.valid || !form.touched">Login</button>
         </div>
       </form>
     </mat-card-content>

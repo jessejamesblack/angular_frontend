@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string, oneTimeToken: string) {
     this.http
@@ -14,6 +15,12 @@ export class LoginService {
         password: password,
         oneTimeToken: oneTimeToken,
       }))
-      .subscribe((data) => {console.log(data)});
+      .subscribe((data) => {
+        if(data.message === "Status OK") {
+          window.location.href = "http://onecause.com/";
+        } else {
+          
+        }
+      });
   }
 }
